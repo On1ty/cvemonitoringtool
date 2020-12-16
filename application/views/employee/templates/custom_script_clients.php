@@ -25,6 +25,10 @@
                 "targets": 'no-sort',
                 "orderable": false,
             }, {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }, {
                 "targets": [4],
                 "visible": false,
                 "searchable": false

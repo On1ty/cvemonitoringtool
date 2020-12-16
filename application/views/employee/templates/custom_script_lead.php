@@ -59,6 +59,12 @@
                 "targets": 'no-sort',
                 "orderable": false,
             }]
+            <?php if ($this->session->employee_role == 4 || $this->session->employee_role == 5) : ?>,
+                dom: 'lBfrtip',
+                buttons: [
+                    'excel'
+                ]
+            <?php endif; ?>,
         });
 
         var tbl_his_pay_walkin = $("#payment-history-table-walkin").DataTable({
@@ -81,6 +87,12 @@
                 "targets": 'no-sort',
                 "orderable": false,
             }]
+            <?php if ($this->session->employee_role == 4 || $this->session->employee_role == 5) : ?>,
+                dom: 'lBfrtip',
+                buttons: [
+                    'excel'
+                ]
+            <?php endif; ?>,
         });
 
         var tbl_walkin = $("#walkin-table").DataTable({
