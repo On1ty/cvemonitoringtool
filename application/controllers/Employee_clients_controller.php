@@ -47,6 +47,7 @@ class Employee_clients_controller extends CI_Controller
         $data = array();
         foreach ($result->result() as $val) {
             $dataArrayHolder = array(
+                $val->id_lead,
                 $val->client_real_id,
                 '<div class="text-center">' . $this->getClientStatus($val->id_lead) . '</div>',
                 '<span class="text-danger">' . $val->client_first . '&nbsp' . $val->client_middle . '&nbsp' . $val->client_last . '</span>',
