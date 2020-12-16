@@ -95,15 +95,25 @@ class Admin_registerm extends CI_Model
 
     public function updateCounselor($data)
     {
-        $this->db->set('created_by', $data['created_by']);
-        $this->db->where('emp_id', $data['emp_id']);
+        $this->db->set('created_by', $data['new_emp']);
+        $this->db->where('real_id', $data['client_to_be_update']);
         $this->db->update('clients');
         return $this->db->affected_rows() > 0;
     }
 
     public function getClients()
     {
-        return $this->db->query('SELECT * FROM clients INNER JOIN clients_info ON clients.id_lead = clients_info.id_lead INNER JOIN employee ON clients.created_by = employee.emp_id  WHERE clients.id_lead IN (SELECT id FROM lead_payment WHERE `type` = 4)');
+        return $this->db->query(
+            'SELECT
+            clients.emp_id as client_emp_id, clients.real_id as client_real_id, clients.id_lead, client_first,
+            client_middle, client_last, client_email, created_time, created_by, phone, other_phone, birthdate,
+            address, school, student_id, intake_date, program, reservation_fee, tuition_fee_depo, contract_fee,
+            deadline, deferral_intake, college, high_school, graduate_school, emp_first, emp_middle, emp_last
+            FROM clients INNER JOIN
+            clients_info ON clients.id_lead = clients_info.id_lead
+            INNER JOIN employee ON clients.created_by = employee.emp_id
+            WHERE clients.id_lead IN (SELECT id FROM lead_payment WHERE `type` = 4)'
+        );
     }
 
     public function checkStageId($id)
