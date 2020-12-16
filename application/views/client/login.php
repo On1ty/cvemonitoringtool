@@ -72,9 +72,6 @@
                     </div>
                 </div>
                 <?php echo form_close(); ?>
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
             </div>
         </div>
     </div>
