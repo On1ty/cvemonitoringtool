@@ -47,7 +47,7 @@ class Employee_clients_controller extends CI_Controller
         $data = array();
         foreach ($result->result() as $val) {
             $dataArrayHolder = array(
-                $val->real_id,
+                $val->client_real_id,
                 '<div class="text-center">' . $this->getClientStatus($val->id_lead) . '</div>',
                 '<span class="text-danger">' . $val->client_first . '&nbsp' . $val->client_middle . '&nbsp' . $val->client_last . '</span>',
                 '<a href="https://mail.google.com/mail/?view=cm&fs=1&to=' . $val->client_email . '" target="_blank">' . $val->client_email . '</a>',
@@ -71,7 +71,7 @@ class Employee_clients_controller extends CI_Controller
             );
 
             if ($employeeRole == 4) {
-                $html = '<span id="' . $val->emp_id . '" class="text-info counselor" data-toggle="modal" data-target="#update-counselor">' . $val->emp_first . ' ' . $val->emp_last . '</span>';
+                $html = '<span id="' . $val->client_real_id . '" class="text-info counselor" data-toggle="modal" data-target="#update-counselor">' . $val->emp_first . ' ' . $val->emp_last . '</span>';
                 array_push($dataArrayHolder, $html);
             }
 
@@ -156,9 +156,11 @@ class Employee_clients_controller extends CI_Controller
         } else {
 
             $data = array(
-                'created_by' => $this->input->post('user-select-employer', true),
-                'emp_id' => $this->input->post('update-counselor', true),
+                'new_emp' => $this->input->post('user-select-employer', true),
+                'client_to_be_update' => $this->input->post('update-counselor', true),
             );
+
+            print_r($data);
 
             $success = $this->Admin_registerm->updateCounselor($data);
             if ($success) {
