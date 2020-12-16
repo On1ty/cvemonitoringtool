@@ -55,7 +55,7 @@ class Employee_prospect_list_controller extends CI_Controller
                      * TOGGLE TYPE yong logic nya dito kaya kung mapapansin, baliktad yong link
                      * 1 = Attended
                      * 2 = Registered
-                     * 
+                     *
                      * pero dahil toggle type sya, baliktaran dapat. kumbaga, salit-salit.
                      */
                     if ($this->session->employee_role != 1) {
@@ -256,6 +256,7 @@ class Employee_prospect_list_controller extends CI_Controller
             }
 
             $data[] = array(
+                $val->id_lead,
                 $val->full_name,
                 $type,
                 '<div class="text-center">' . $val->amount . '</div>',
@@ -303,6 +304,7 @@ class Employee_prospect_list_controller extends CI_Controller
             }
 
             $data[] = array(
+                $val->id_lead,
                 $val->client_first . ' ' . $val->client_middle . ' ' . $val->client_last,
                 $type,
                 '<div class="text-center">' . $val->amount . '</div>',
