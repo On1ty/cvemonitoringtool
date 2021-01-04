@@ -14,11 +14,10 @@ class Emp_clientsm extends CI_Model
             clients.emp_id as client_emp_id, clients.real_id as client_real_id, clients.id_lead, client_first,
             client_middle, client_last, client_email, created_time, created_by, phone, other_phone, birthdate,
             address, school, student_id, intake_date, program, reservation_fee, tuition_fee_depo, contract_fee,
-            deadline, deferral_intake, college, high_school, graduate_school, emp_first, emp_middle, emp_last
+            deadline, deferral_intake, college, high_school, graduate_school
             FROM clients INNER JOIN
             clients_info ON clients.id_lead = clients_info.id_lead
-            INNER JOIN employee ON clients.created_by = ' . $id .'
-            WHERE clients.id_lead IN (SELECT id FROM lead_payment WHERE `type` = 4)'
+            AND clients.created_by = ' . $id .' WHERE clients.id_lead IN (SELECT id FROM lead_payment WHERE `type` = 4)'
         );
     }
 
