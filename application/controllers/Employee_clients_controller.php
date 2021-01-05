@@ -93,25 +93,20 @@ class Employee_clients_controller extends CI_Controller
 
     private function checkRole($role, $val, $stage)
     {
-        switch ($role) {
-            case 3:
-                if ($stage === 'Endorsement to Documentation Team') {
-                    return '<div class="text-center">
-                            <a href="' . base_url() . 'employee/clients/stage/approve/Endorsement to Documentation Team/' . $val->id_lead . '" class="btn text-white btn-info text-sm btn-xs"><i class="far fa-folder-open"></i> View</a>
-                            <a href="send/clients/credentials/' . $val->id_lead . '" class="btn text-white btn-danger text-sm btn-xs send-pass" data-confirm="Are you sure you want to email client\'s credentials?"><i class="fas fa-key"></i></a>
-                        </div>';
-                } else {
-                    return '<div class="text-center">
-                            <a href="clients/profile/id/' . $val->id_lead . '" class="btn text-white btn-success text-sm btn-xs"><i class="far fa-folder-open"></i> View</a>
-                            <a href="send/clients/credentials/' . $val->id_lead . '" class="btn text-white btn-danger text-sm btn-xs send-pass" data-confirm="Are you sure you want to email client\'s credentials?"><i class="fas fa-key"></i></a>
-                        </div>';
-                }
-            default:
-                return '<div class="text-center">
-                            <a href="clients/profile/id/' . $val->id_lead . '" class="btn text-white btn-success text-sm btn-xs"><i class="far fa-folder-open"></i> View</a>
-                            <a href="send/clients/credentials/' . $val->id_lead . '" class="btn text-white btn-danger text-sm btn-xs send-pass" data-confirm="Are you sure you want to email client\'s credentials?"><i class="fas fa-key"></i></a>
-                        </div>';
+        $base_url = base_url();
+        $action = "<div class=\"text-center\">";
+
+        //3 = Documentation
+        if ($role == 3 && $stage === 'Endorsement to Documentation Team'){
+            $action .= "<a href=\"{$base_url}employee/clients/stage/approve/Endorsement to Documentation Team/{$val->id_lead}\" class=\"btn text-white btn-info text-sm btn-xs\"><i class=\"far fa-folder-open\"></i> View</a>";
+        }else{
+            $action .= "<a href=\"clients/profile/id/{$val->id_lead}\" class=\"btn text-white btn-success text-sm btn-xs\"><i class=\"far fa-folder-open\"></i> View</a>";
         }
+
+        $action .= "<a href=\"send/clients/credentials/{$val->id_lead}\" class=\"btn text-white btn-info text-sm btn-xs send-pass ml-1\" data-confirm=\"Are you sure you want to email client\'s credentials?\"><i class=\"fas fa-key\"></i></a>";
+        $action .= "</div>";
+
+        return $action;
     }
 
     private function getClientStatus($id_lead)
