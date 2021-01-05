@@ -2,7 +2,7 @@
 	class="content-wrapper border border-left-0 border-right-0 border-bottom-0"
 >
 	<div class="content-header">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<h1 class="m-0 text-dark">List of Clients</h1>
@@ -11,8 +11,8 @@
 		</div>
 	</div>
 	<div class="content">
-		<div class="container">
-			<div class="row justify-content-lg-center">
+		<div class="container-fluid">
+			<div class="row">
 				<section class="col-lg-12">
 					<?php if ($this->session->flashdata('updated')) : ?>
 					<div class="alert alert-success alert-dismissible">
