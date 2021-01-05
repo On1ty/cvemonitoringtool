@@ -185,32 +185,36 @@ class Employee_prospect_list_controller extends CI_Controller
 
             switch ($status) {
                 case 3:
-                    $status = '<div class="text-center"><span class="badge badge-danger">Assessment</span></div>';
+                    $status_html = '<div class="text-center"><span class="badge badge-danger">Assessment</span></div>';
                     break;
                 case 4:
-                    $status = '<div class="text-center"><span class="badge badge-success">Sign-Up</span></div>';
+                    $status_html = '<div class="text-center"><span class="badge badge-success">Sign-Up</span></div>';
                     break;
                 default:
-                    $status = '<div class="text-center"><span class="badge badge-secondary">No Status</span></div>';
+                    $status_html = '<div class="text-center"><span class="badge badge-secondary">No Status</span></div>';
                     break;
             }
 
+            $raw_data = array(
+                $val->client_first . ' ' . $val->client_middle . ' ' . $val->client_last,
+                $val->client_email,
+                $val->phone,
+                $status_html,
+            );
+
             if ($this->session->employee_role == 1) {
-                $data[] = array(
-                    $val->client_first . ' ' . $val->client_middle . ' ' . $val->client_last,
-                    $val->client_email,
-                    $val->phone,
-                    $status,
-                    '<div class="text-center"><a href="employee/pay/fees/' . $val->id_lead . '" class="btn btn-default btn-sm pay" data-toggle="modal" data-target="#pay-modal">Fees</a></div>',
-                );
-            } else {
-                $data[] = array(
-                    $val->client_first . ' ' . $val->client_middle . ' ' . $val->client_last,
-                    $val->client_email,
-                    $val->phone,
-                    $status,
-                );
+                array_push($raw_data, "<div class=\"text-center\"><a href=\"employee/pay/fees/{$val->id_lead}\" class=\"btn btn-default btn-sm pay\" data-toggle=\"modal\" data-target=\"#pay-modal\">Fees</a></div>");
             }
+
+            if($this->session->employee_role == 4){
+                if($status == 3 || $status == 4){
+                    array_push($raw_data, "<div class=\"text-center\"><span class=\"text-white text-sm bg-dark rounded p-1\">Cannot Remove</span></div>");
+                }else{
+                    array_push($raw_data, "<div class=\"text-center\"><a href=\"../client/remove/$val->id_lead\" class=\"btn text-white btn-danger text-sm btn-xs delete-client\"><i class=\"fas fa-user-times\"></i> Remove</a></div>");
+                }
+            }
+
+            $data[] = $raw_data;
         }
 
         $output = array(
@@ -322,6 +326,17 @@ class Employee_prospect_list_controller extends CI_Controller
             "data" => $data
         );
         echo json_encode($output);
+    }
+
+    public function remove_client($id_lead)
+    {
+        if($this->Admin_actionm->remove_client($id_lead)){
+            $this->session->set_flashdata('pay_success', 'Client has been safely removed');
+            redirect('employee/list/prospect');
+        }else{
+            $this->session->set_flashdata('message_error', 'Cannot remove the client. Please try later.');
+            redirect('employee/list/prospect');
+        }
     }
 
     public function editPayment($hash)
