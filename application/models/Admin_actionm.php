@@ -26,6 +26,16 @@ class Admin_actionm extends CI_Model
         return $this->db->affected_rows() > 0;
     }
 
+    public function remove_client($id_lead){
+        $this->db->where('id_lead', $id_lead);
+        $this->db->delete('stages');
+        $this->db->where('id_lead', $id_lead);
+        $this->db->delete('clients');
+        $this->db->where('id_lead', $id_lead);
+        $this->db->delete('clients_info');
+        return $this->db->affected_rows() > 0;
+    }
+
     public function editPayment($hash, $data)
     {
         $this->db->set('type', $data['type']);
