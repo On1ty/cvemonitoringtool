@@ -116,6 +116,10 @@ class Admin_registerm extends CI_Model
         );
     }
 
+    public function latest_id(){
+        return $this->db->select('real_id')->order_by('emp_id',"desc")->limit(1)->get('clients')->row_array()['real_id'];
+    }
+
     public function checkStageId($id)
     {
         $this->db->where('id', $id);

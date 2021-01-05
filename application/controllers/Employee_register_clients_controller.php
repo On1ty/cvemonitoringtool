@@ -28,7 +28,10 @@ class Employee_register_clients_controller extends CI_Controller
             $this->load->view('employee/templates/custom_script_register');
             $this->load->view('employee/templates/end_footer');
         } else {
-            $real_id = $this->_generateId();
+
+            $latest_id = $this->Admin_registerm->latest_id();
+            $latest_exploded_id = explode('-', $latest_id)[1];
+            $real_id = $this->_generateId($latest_exploded_id);
             $lead_id = $this->input->post('user-select-lead', true);
 
             if (empty($lead_id)) {
@@ -179,11 +182,11 @@ class Employee_register_clients_controller extends CI_Controller
         }
     }
 
-    public function _generateId()
+    public function _generateId($latest_id)
     {
         $this->load->helper('string');
-        $random_num = random_string('numeric', 6);
-        return date('Y') . '-' . $random_num;
+        $new_id = (int)$latest_id;
+        return date('my') . '-' . ($new_id + 1);
     }
 
     private function role($role)
