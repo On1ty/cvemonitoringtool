@@ -231,5 +231,35 @@
             });
             return false;
         });
+
+        $('#wrapper-walkin').on('click', '.delete-client', function(ev) {
+            let href = $(this).attr('href');
+            let modalHtml;
+            if (!$('#popup').length) {
+                modalHtml = '<div class="modal fade text-sm" id="popup">';
+                modalHtml += '  <div class="modal-dialog modal-sm">';
+                modalHtml += '      <div class="modal-content">';
+                modalHtml += '          <div class="modal-header bg-danger">';
+                modalHtml += '              <p class="modal-title font-weight-bold">Remove Client</p>';
+                modalHtml += '          </div>';
+                modalHtml += '          <div class="modal-body">';
+                modalHtml += '              <p>Removing client will also remove their data.</p>';
+                modalHtml += '          </div>';
+                modalHtml += '          <div class="modal-footer justify-content-between">';
+                modalHtml += '              <a class="btn btn-default btn-sm" data-dismiss="modal">Cancel</a>';
+                modalHtml += '              <a class="btn btn-danger btn-sm" id="dataConfirmOK">Remove</a>';
+                modalHtml += '          </div>';
+                modalHtml += '      </div>';
+                modalHtml += '  </div>';
+                modalHtml += '</div>';
+                $('.content-wrapper').append(modalHtml);
+            }
+            $('#total_fee').html($(this).attr('data-message'));
+            $('#dataConfirmOK').attr('href', href);
+            $('#popup').modal({
+                show: true
+            });
+            return false;
+        });
     });
 </script>
