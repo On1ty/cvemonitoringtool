@@ -29,6 +29,12 @@
 						<?= $this->session->flashdata('pay_success'); ?>
 					</div>
 					<?php endif; ?>
+					<?php if ($this->session->flashdata('message_error')) : ?>
+					<div class="alert alert-danger alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<?= $this->session->flashdata('message_error'); ?>
+					</div>
+					<?php endif; ?>
 					<?php if ($this->session->flashdata('delete_register_attended')) : ?>
 					<div class="alert alert-success alert-dismissible">
 						<button type="button" class="close" data-dismiss="alert">×</button>
@@ -112,7 +118,7 @@
 												<th>Email</th>
 												<th>Phone</th>
 												<th>Status</th>
-												<?php if ($this->session->employee_role == 1) : ?>
+												<?php if ($this->session->employee_role == 1 || $this->session->employee_role == 4) : ?>
 												<th class="no-sort"></th>
 												<?php endif; ?>
 											</tr>
