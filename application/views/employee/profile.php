@@ -283,7 +283,7 @@
                                                                             <a href="<?= base_url() ?>employee/clients/profile/id/<?= $this->uri->segment(5) ?>/stage<?= $key + 1 ?>" class="card-link">View Files</a>
                                                                         <?php endif; ?>
                                                                     <?php else : ?>
-                                                                        <?php if ($this->session->employee_role == 5 || $this->session->employee_role == 4) : ?>
+                                                                        <?php if ($this->session->employee_role == 5 || $this->session->employee_role == 3 || $this->session->employee_role == 4) : ?>
                                                                             <a href="<?= base_url() ?>employee/clients/profile/id/<?= $this->uri->segment(5) ?>/stage<?= $key + 1 ?>" class="card-link">View Files</a>
                                                                         <?php endif; ?>
                                                                     <?php endif; ?>
