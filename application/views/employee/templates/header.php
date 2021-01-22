@@ -104,7 +104,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-light border border-danger border-bottom-0 border-left-0 border-right-0">
-            <div class="container">
+            <div class="container-fluid">
                 <a href="" class="navbar-brand">
                     <img src="<?= base_url() ?>images/cve_tagline_small.png" alt="Commonwealth Visa Experts The experts you can trust" width="300px">
                 </a>
@@ -157,6 +157,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <li class="nav-item">
                                 <a href="<?= base_url() ?>employee/import/csv" class="nav-link <?php if ($this->uri->segment(3) == 'csv') : ?>active<?php endif; ?>">
                                     Import CSV
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if ($this->session->employee_role == 4) : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>employee/set" class="nav-link <?php if ($this->uri->segment(2) == 'set') : ?>active<?php endif; ?>">
+                                    Set ID MMYY
                                 </a>
                             </li>
                         <?php endif; ?>

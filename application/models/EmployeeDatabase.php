@@ -220,4 +220,13 @@ class EmployeeDatabase extends CI_Model
     {
         return $this->db->get('employee');
     }
+
+    public function id_settings(){
+        return $this->db->get('id_settings')->row_array();
+    }
+
+    public function update_id_settings($data){
+        $this->db->set($data);
+        return $this->db->update('id_settings');
+    }
 }

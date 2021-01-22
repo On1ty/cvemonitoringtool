@@ -7,7 +7,7 @@ class Employee_settings_controller extends CI_Controller
     public function index()
     {
         if (!$this->session->employee_logged) {
-            redirect('employee/list/prospect');
+            redirect('employee');
         }
 
         $data['emp'] = $this->EmployeeDatabase->employeeDetails($this->session->employee_id);

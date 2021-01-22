@@ -6,7 +6,7 @@ class Employee_prospect_list_controller extends CI_Controller
     public function index()
     {
         if (!$this->session->employee_logged) {
-            redirect('employee/settings');
+            redirect('employee');
         }
 
         $this->load->view('employee/templates/header');

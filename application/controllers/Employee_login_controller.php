@@ -6,7 +6,7 @@ class Employee_login_controller extends CI_Controller
     public function index()
     {
         if ($this->session->employee_logged) {
-            redirect('employee/clients');
+            redirect('employee');
         }
 
         $this->form_validation->set_error_delimiters('<span class="error invalid-feedback" style="display:block;">', '</span>');
