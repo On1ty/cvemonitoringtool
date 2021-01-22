@@ -146,8 +146,14 @@ class Employee_clients_files_controller extends CI_Controller
             $file = $this->input->post('manual_file_remarks', true);
             $type = 'N/A';
         } else {
+
             $folder_name = $id_lead;
-            $config['upload_path'] = 'uploads/' . $folder_name;
+
+            if (!file_exists('uploads/' . $folder_name)) {
+                mkdir('uploads/' . $folder_name, 0777, true);
+            }
+
+            $config['upload_path'] = "uploads/$folder_name";
             $config['allowed_types'] = 'jpg|jpeg|png|docx|pdf|csv|doc|xlsx|xlsm|xlt|txt|ods|xltx';
             $config['encrypt_name'] = true;
 
@@ -315,23 +321,18 @@ class Employee_clients_files_controller extends CI_Controller
     private function generateIdentityDocuments()
     {
         return array(
-            (object) array('doc'  => 'Assessment Report', 'code'  => 'Assessment', 'form' => 'Assessment'),
-            (object) array('doc'  => 'Service Agreement', 'code'  => 'Service Agreement', 'form' => 'Service Agreement'),
-            (object) array('doc' =>  'Valid ID', 'code' => 'Valid ID', 'form' => 'Identity Documents'),
-            (object) array('doc'  => 'Travel History', 'code'  => 'Travel History', 'form' => 'Identity Documents'),
-            (object) array('doc'  => 'Birth Certificate', 'code'  => 'Birth Certificate', 'form' => 'Identity Documents'),
-            (object) array('doc'  => 'Marriage Certificate', 'code'  => 'Marriage Certificate', 'form' => 'Identity Documents'),
-            (object) array('doc'  => 'NBI/Police Clearance', 'code'  => 'NBI/Police Clearance', 'form' => 'Identity Documents'),
-            (object) array('doc'  => 'Passport Size Picture', 'code'  => 'Passport Size Picture', 'form' => 'Identity Documents'),
-            (object) array('doc'  => 'Passport', 'code'  => 'Passport Page', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'High School Diploma/Certificate of Graduation', 'code'  => 'HS Diploma', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'College Diploma/Certificate of Graduation', 'code'  => 'College Diploma', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'High School TOR (Form137)', 'code'  => 'HS TOR', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'College TOR', 'code'  => 'College TOR', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'English Test Results', 'code'  => 'English Test', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'PRC Board Certificate', 'code'  => 'PRC', 'form' => 'Enrollment/Qualification Documents'),
-            (object) array('doc'  => 'Certificate of Employment', 'code'  => 'Cert Employment', 'form' => 'Employment & Training Documents'),
-            (object) array('doc'  => 'Certificate of Training/Award', 'code'  => 'Cert Training', 'form' => 'Employment & Training Documents'),
+            (object) array('doc'  => 'Assessment Report', 'code'  => 'assessment', 'form' => ''),
+            (object) array('doc'  => 'Service Agreement', 'code'  => 'service', 'form' => ''),
+            (object) array('doc'  => 'Passport', 'code'  => 'Passport', 'form' => ''),
+            (object) array('doc'  => 'Birth Certificate', 'code'  => 'birth', 'form' => ''),
+            (object) array('doc'  => 'Marriage Certificate', 'code'  => 'marriage', 'form' => ''),
+            (object) array('doc'  => 'High school Diploma', 'code'  => 'hs diploma', 'form' => ''),
+            (object) array('doc'  => 'High school Transcript', 'code'  => 'hs transcript', 'form' => ''),
+            (object) array('doc'  => 'College Diploma', 'code'  => 'college diploma', 'form' => ''),
+            (object) array('doc'  => 'College Transcript', 'code'  => 'college transcript', 'form' => ''),
+            (object) array('doc'  => 'IELTS', 'code'  => 'ielts', 'form' => ''),
+            (object) array('doc'  => 'Resume', 'code'  => 'resume', 'form' => ''),
+            (object) array('doc'  => 'School Application Form', 'code'  => 'school app form', 'form' => ''),
         );
     }
 
