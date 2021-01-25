@@ -24,7 +24,6 @@
             </div>
         </div>
     </section>
-
     <!-- Main content -->
     <div class="content">
         <div class="container">
@@ -196,39 +195,69 @@
                                         </div>
                                     <?php endforeach; ?>
                                 <?php elseif ($stage_name == 'Enrollment') : ?>
-                                    <div class="col-12 file-card">
+                                    <div class="col-6 file-card">
                                         <div class="info-box border">
                                             <span class="info-box-icon text-secondary">
                                                 <i class="fas fa-file-upload"></i>
                                             </span>
                                             <div class="info-box-content text-dark">
                                                 <span class="info-box-text mb-1">LOA/OOP</span>
-                                                <h6 class="card-subtitle text-muted">Releasing of LOA/OOP</h6>
-                                                <?php if (empty($files)) : ?>
-                                                    <span class="info-box-number">No LOA/OOP uploaded</span>
-                                                <?php else : ?>
-                                                    <span class="info-box-number"><?= $files[0]->file ?>&nbsp;•&nbsp;<?= date('m-d-Y', strtotime($files[0]->upload_date)) ?></span>
-                                                <?php endif; ?>
                                                 <div class="progress-description text-right">
-                                                    <?php if ($this->session->employee_role == 5) : ?>
-                                                        <?php if (!empty($method->searchArray($files, 'LOA/OOP', 'doc'))) : ?>
-                                                            <?php $row = $method->searchArray($files, 'LOA/OOP', 'doc') ?>
-                                                            <?php if ($row[0]->type != 'N/A') : ?>
-                                                                <a href="<?= base_url('uploads') ?>/LOA or OOP/<?= $row[0]->encrypt . $row[0]->type ?>" class="" download="">Download</a>
-                                                            <?php endif ?>
-                                                        <?php endif ?>
-                                                    <?php endif ?>
                                                     <?php if ($this->session->employee_role != 1) : ?>
-                                                        <?php if (empty($files)) : ?>
                                                             <a href="" class="manual-upload" data-toggle="modal" data-target="#manual-upload-modal" data-doc="LOA/OOP" data-form="Releasing of LOA/OOP" data-stage="<?= $stage_name; ?>">Upload LOA/OOP</a>
-                                                        <?php else : ?>
-                                                            <a href="<?= base_url() ?>employee/clients/files/reject/<?= $files[0]->id ?>/<?= $files[0]->uploaded_by ?>" class="confirmation ml-3" data-title="Reject Document" data-confirm="Are you sure? This will remove on clients portal too.">Remove LOA/OOP</a>
-                                                        <?php endif; ?>
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-6 file-card mb-5">
+                                        <div class="info-box border">
+                                            <span class="info-box-icon text-secondary">
+                                                <i class="fas fa-file-upload"></i>
+                                            </span>
+                                            <div class="info-box-content text-dark">
+                                                <span class="info-box-text mb-1">Deferral Request</span>
+                                                <div class="progress-description text-right">
+                                                    <?php if ($this->session->employee_role != 1) : ?>
+                                                            <a href="" class="manual-upload" data-toggle="modal" data-target="#manual-upload-modal" data-doc="Deferral Request" data-form="" data-stage="<?= $stage_name; ?>">Upload Deferral Request</a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php if (!empty($files)) : ?>
+                                        <?php foreach ($files as $val): ?>
+                                            <div class="col-12 file-card">
+                                                <div class="info-box border">
+                                                    <span class="info-box-icon text-secondary">
+                                                        <i class="fas fa-file"></i>
+                                                    </span>
+                                                    <div class="info-box-content text-dark">
+                                                        <span class="info-box-text mb-1"><?= $val->doc?></span>
+                                                        <h6 class="card-subtitle text-muted"><?= date('m-d-Y', strtotime($val->upload_date)) ?></h6>
+                                                            <span class="info-box-number"><?= $val->file ?>&nbsp;</span>
+                                                        <div class="progress-description text-right">
+                                                            <?php if ($this->session->employee_role == 5) : ?>
+                                                                <?php if (!empty($method->searchArray($val, 'LOA/OOP', 'doc'))) : ?>
+                                                                    <?php $row = $method->searchArray($val, 'LOA/OOP', 'doc') ?>
+                                                                    <?php if ($row[0]->type != 'N/A') : ?>
+                                                                        <a href="<?= base_url('uploads') ?>/LOA or OOP/<?= $row[0]->encrypt . $row[0]->type ?>" class="" download="">Download</a>
+                                                                    <?php endif ?>
+                                                                <?php endif ?>
+                                                            <?php endif ?>
+                                                            <?php if ($this->session->employee_role != 1) : ?>
+                                                                <a href="<?= base_url() ?>employee/clients/files/reject/<?= $val->id ?>/<?= $val->uploaded_by ?>" class="confirmation ml-3" data-title="Reject Document" data-confirm="Are you sure? This will remove on clients portal too.">Remove <?= $val->doc?></a>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <div class="col-12 text-center mt-5">
+                                            <p class="lead">No document uploaded</p>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php elseif ($stage_name == 'Release of LOA/OOP') : ?>
                                     <div class="col-12 file-card">
                                         <div class="info-box border">
